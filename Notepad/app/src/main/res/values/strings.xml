@@ -3,4 +3,7 @@
     <string name="add">ADD</string>
     <string name="title_name">Título</string>
     <string name="description_name">Escreva seu texto…</string>
+    <string name="edit_name">Editar</string>
+    <string name="remove_name">Remover</string>
+    <string name="salve_name">Salvar</string>
 </resources>

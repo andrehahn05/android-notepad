@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="add">ADD</string>
+    <string name="edit_name">Editar</string>
+    <string name="remove_name">Remover</string>
+    <string name="salve_name">Salvar</string>
 </resources>
