@@ -14,12 +14,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Notepad"
         tools:targetApi="31">
+        <activity android:name=".ui.activity.DetailsOfNotepad" />
+        <activity android:name=".ui.activity.NoteFormActivity" />
         <activity
-            android:name=".ui.activity.NoteFormActivity"
-            android:exported="true" />
-        <activity android:name=".ui.activity.ListActivity" />
-        <activity
-            android:name=".ui.activity.DetailsOfNotepad"
+            android:name=".ui.activity.ListActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
