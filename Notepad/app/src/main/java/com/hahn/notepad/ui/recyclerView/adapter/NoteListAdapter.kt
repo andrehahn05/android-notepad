@@ -7,10 +7,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.hahn.notepad.databinding.ItemNoteBinding
 import com.hahn.notepad.model.Notepad
+import kotlinx.coroutines.flow.Flow
 
 
 class NoteListAdapter(
-    private val context: Context,
+    private val context: Context
 ) : RecyclerView.Adapter<NoteListAdapter.ViewHolder>() {
 
     private val noteLists = mutableListOf<Notepad>()
@@ -44,8 +45,11 @@ class NoteListAdapter(
 
     @SuppressLint("NotifyDataSetChanged")
     fun update(noteLists: List<Notepad>){
+        notifyItemRangeRemoved(0, this.noteLists.size)
         this.noteLists.clear()
         this.noteLists.addAll(noteLists)
-        notifyDataSetChanged()
+        notifyItemRangeInserted(0, this.noteLists.size)
     }
 }
+
+
