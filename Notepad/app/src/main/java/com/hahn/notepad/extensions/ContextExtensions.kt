@@ -13,7 +13,7 @@ fun Context.toast(message:String) {
     ).show()
 }
 
-fun Context.nav(
+fun Context.navigate(
     clazz: Class<*>,
     intent: Intent.() -> Unit = {}
 ) {

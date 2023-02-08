@@ -1,12 +1,11 @@
 package com.hahn.notepad.ui.activity
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.hahn.notepad.database.AppDatabase
 import com.hahn.notepad.databinding.ActivityListBinding
-import com.hahn.notepad.extensions.nav
+import com.hahn.notepad.extensions.navigate
 import com.hahn.notepad.ui.recyclerView.adapter.NoteListAdapter
 import kotlinx.coroutines.launch
 
@@ -26,7 +25,9 @@ class ListActivity : AppCompatActivity() {
         setContentView(binding.root)
         configRecyclerView()
         handleFab()
-//        lifecycleScope.launch { getNote() }
+        lifecycleScope.launch {
+            getNote()
+        }
     }
 
     private suspend fun getNote() {
@@ -42,13 +43,16 @@ class ListActivity : AppCompatActivity() {
     }
 
     private fun navigateToForm() {
-        val intent = Intent(this@ListActivity, NoteFormActivity::class.java)
-        startActivity(intent)
+         navigate(NoteFormActivity::class.java)
     }
 
     private fun configRecyclerView() {
         val recyclerView = binding.activityListRv
         recyclerView.adapter = adapter
-
+        adapter.handleItemClicked = { noteList ->
+            navigate(NoteFormActivity::class.java) {
+                putExtra(NOTE_ID, noteList.id)
+            }
         }
     }
+}
