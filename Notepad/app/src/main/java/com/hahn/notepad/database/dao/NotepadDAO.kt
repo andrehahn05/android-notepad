@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.Flow
 interface NotepadDAO {
 
     @Query("SELECT * FROM notepad WHERE id = :id")
-    fun findById(id: String): Flow<Notepad?>
+    fun findById(id: String): Flow<Notepad>
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun save(vararg note: Notepad)
     @Query("SELECT * FROM notepad")

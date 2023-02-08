@@ -12,7 +12,7 @@ private const val NAME_DATABASE = "note.db"
 @Database(entities = [Notepad::class], version = 1, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
 
-    abstract fun notepadDao(): NotepadDAO
+    abstract val notepadDao: NotepadDAO
 
     companion object {
         @Volatile
