@@ -3,6 +3,8 @@ package com.hahn.notepad.ui.activity
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager.VERTICAL
 import com.hahn.notepad.database.AppDatabase
 import com.hahn.notepad.databinding.ActivityListBinding
 import com.hahn.notepad.extensions.navigate
@@ -42,15 +44,20 @@ class ListActivity : AppCompatActivity() {
         }
     }
 
-    private fun navigateToForm() {
-         navigate(NoteFormActivity::class.java)
+    private fun configRecyclerView() {
+        val divider = DividerItemDecoration(this,VERTICAL)
+         binding.activityListRv.addItemDecoration(divider)
+         binding.activityListRv.adapter = adapter
+         navigateToDetails()
     }
 
-    private fun configRecyclerView() {
-        val recyclerView = binding.activityListRv
-        recyclerView.adapter = adapter
+    private fun navigateToForm() {
+        navigate(NoteFormActivity::class.java)
+    }
+
+    private fun navigateToDetails() {
         adapter.handleItemClicked = { noteList ->
-            navigate(NoteFormActivity::class.java) {
+            navigate(DetailsOfNotepad::class.java) {
                 putExtra(NOTE_ID, noteList.id)
             }
         }
