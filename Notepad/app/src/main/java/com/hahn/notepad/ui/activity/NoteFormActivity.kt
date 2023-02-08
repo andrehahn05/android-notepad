@@ -1,8 +1,11 @@
 package com.hahn.notepad.ui.activity
 
-import androidx.appcompat.app.AppCompatActivity
+
+import android.annotation.SuppressLint
 import android.os.Bundle
+import android.view.Menu
 import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.hahn.notepad.R
 import com.hahn.notepad.database.AppDatabase
@@ -12,17 +15,18 @@ import com.hahn.notepad.model.Notepad
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.launch
 
-@Suppress("UNREACHABLE_CODE")
+
 class NoteFormActivity : AppCompatActivity() {
 
-    private var noteId : String? = null
+    private var noteId: String? = null
     private var note: Notepad? = null
-    private val binding by  lazy {
+    private val binding by lazy {
         ActivityNoteFormBinding.inflate(layoutInflater)
     }
     private val noteDao: NotepadDAO by lazy {
         AppDatabase.getInstance(this).notepadDao()
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
@@ -31,7 +35,7 @@ class NoteFormActivity : AppCompatActivity() {
         }
     }
 
-    private fun completedFields(note:Notepad){
+    private fun completedFields(note: Notepad) {
         with(binding) {
             activityFormTitle.setText(note.title)
             activityFormDescription.setText(note.description)
@@ -47,15 +51,22 @@ class NoteFormActivity : AppCompatActivity() {
         } ?: finish()
     }
 
+
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.note_form_menu, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return super.onOptionsItemSelected(item)
-        when(item.itemId){
+
+        when (item.itemId) {
             R.id.details_menu_save -> {
                 note?.let {
                     lifecycleScope.launch {
                         noteDao.save(it)
-//                        toast("Salvo com sucesso")
                         finish()
+
                     }
                 }
             }
