@@ -1,15 +1,13 @@
 package com.hahn.notepad.ui.activity
 
-
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.hahn.notepad.R
 import com.hahn.notepad.database.AppDatabase
-import com.hahn.notepad.database.dao.NotepadDAO
+import com.hahn.notepad.database.dao.NotepadDao
 import com.hahn.notepad.databinding.ActivityNoteFormBinding
 import com.hahn.notepad.extensions.toast
 import com.hahn.notepad.model.Notepad
@@ -17,13 +15,13 @@ import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.launch
 
 
-class NoteFormActivity : AppCompatActivity() {
+open class NoteFormActivity : AppCompatActivity() {
 
 
     private val binding by lazy {
         ActivityNoteFormBinding.inflate(layoutInflater)
     }
-    private val noteDao: NotepadDAO by lazy {
+    private val noteDao: NotepadDao by lazy {
         AppDatabase.getInstance(this).notepadDao
     }
     private var noteId: String? = null
@@ -41,13 +39,12 @@ class NoteFormActivity : AppCompatActivity() {
         with(binding) {
             activityFormTitle.setText(note.title)
             activityFormDescription.setText(note.description)
-
         }
     }
 
     private suspend fun getNote() {
         noteId?.let { id ->
-            noteDao.findById(id).filterNotNull().collect { foundNote->
+            noteDao.findById(id).filterNotNull().collect { foundNote ->
                 noteId = foundNote.id
                 completedFields(foundNote)
             }
@@ -68,8 +65,6 @@ class NoteFormActivity : AppCompatActivity() {
         when (item.itemId) {
             R.id.details_menu_save -> {
                 addNote()
-                Log.i("onclick", "item clicado ${item}")
-                toast("Salvo com sucesso")
             }
         }
         return super.onOptionsItemSelected(item)
@@ -78,8 +73,11 @@ class NoteFormActivity : AppCompatActivity() {
     private fun addNote() {
         val note = createNote()
         lifecycleScope.launch {
-            noteDao.save(note)
-            finish()
+            if (!(note.title.isEmpty() && note.description.isEmpty())) {
+                noteDao.save(note)
+                toast("Salvo com sucesso")
+                finish()
+            }
         }
     }
 
@@ -91,7 +89,7 @@ class NoteFormActivity : AppCompatActivity() {
                 id = id, title = title, description = desc
             )
         } ?: Notepad(
-              title = title, description = desc
+            title = title, description = desc
         )
     }
 }

@@ -4,7 +4,7 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.hahn.notepad.database.dao.NotepadDAO
+import com.hahn.notepad.database.dao.NotepadDao
 import com.hahn.notepad.model.Notepad
 
 private const val NAME_DATABASE = "note.db"
@@ -12,7 +12,7 @@ private const val NAME_DATABASE = "note.db"
 @Database(entities = [Notepad::class], version = 1, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
 
-    abstract val notepadDao: NotepadDAO
+    abstract val notepadDao: NotepadDao
 
     companion object {
         @Volatile

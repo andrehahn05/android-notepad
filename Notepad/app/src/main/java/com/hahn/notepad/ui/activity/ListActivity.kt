@@ -1,8 +1,11 @@
 package com.hahn.notepad.ui.activity
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager.VERTICAL
 import com.hahn.notepad.database.AppDatabase
@@ -28,7 +31,9 @@ class ListActivity : AppCompatActivity() {
         configRecyclerView()
         handleFab()
         lifecycleScope.launch {
-            getNote()
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                getNote()
+            }
         }
     }
 
