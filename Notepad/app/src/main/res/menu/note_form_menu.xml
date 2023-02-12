@@ -5,5 +5,5 @@
         android:id="@+id/details_menu_save"
         android:icon="@drawable/action_check"
         android:title="@string/salve_name"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="always" />
 </menu>

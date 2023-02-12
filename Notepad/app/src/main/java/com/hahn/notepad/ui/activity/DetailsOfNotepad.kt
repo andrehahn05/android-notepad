@@ -30,8 +30,6 @@ class DetailsOfNotepad : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         tryLoadIdNote()
-
-
     }
 
     override fun onResume() {
@@ -62,7 +60,7 @@ class DetailsOfNotepad : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.details_menu_edit -> {
+            R.id.details_menu_save -> {
                 navigate(NoteFormActivity::class.java){
                     putExtra(NOTE_ID, noteList?.id)
                 }

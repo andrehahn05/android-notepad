@@ -17,7 +17,6 @@ import kotlinx.coroutines.launch
 
 open class NoteFormActivity : AppCompatActivity() {
 
-
     private val binding by lazy {
         ActivityNoteFormBinding.inflate(layoutInflater)
     }
@@ -56,6 +55,9 @@ open class NoteFormActivity : AppCompatActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        noteId?.let {
+            menuInflater.inflate(R.menu.details_of_notepad_menu, menu)
+        }
         menuInflater.inflate(R.menu.note_form_menu, menu)
         return super.onCreateOptionsMenu(menu)
     }

@@ -15,6 +15,7 @@ import com.hahn.notepad.ui.recyclerView.adapter.NoteListAdapter
 import kotlinx.coroutines.launch
 
 class ListActivity : AppCompatActivity() {
+
     private val adapter by lazy {
         NoteListAdapter(this)
     }
@@ -62,7 +63,7 @@ class ListActivity : AppCompatActivity() {
 
     private fun navigateToDetails() {
         adapter.handleItemClicked = { noteList ->
-            navigate(DetailsOfNotepad::class.java) {
+            navigate(NoteFormActivity::class.java) {
                 putExtra(NOTE_ID, noteList.id)
             }
         }

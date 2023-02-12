@@ -3,13 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/details_menu_edit"
-        android:icon="@drawable/action_edit"
-        android:title="@string/edit_name"
-        app:showAsAction="ifRoom" />
-    <item
         android:id="@+id/details_menu_del"
         android:icon="@drawable/action_remove"
         android:title="@string/remove_name"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="always" />
 </menu>
