@@ -16,7 +16,7 @@ import kotlinx.coroutines.launch
 
 
 open class NoteFormActivity : AppCompatActivity() {
-
+    private var noteList: Notepad? = null
     private val binding by lazy {
         ActivityNoteFormBinding.inflate(layoutInflater)
     }
@@ -44,6 +44,7 @@ open class NoteFormActivity : AppCompatActivity() {
     private suspend fun getNote() {
         noteId?.let { id ->
             noteDao.findById(id).filterNotNull().collect { foundNote ->
+                noteList = foundNote
                 noteId = foundNote.id
                 completedFields(foundNote)
             }
@@ -67,6 +68,14 @@ open class NoteFormActivity : AppCompatActivity() {
         when (item.itemId) {
             R.id.details_menu_save -> {
                 addNote()
+            }
+            R.id.details_menu_del -> {
+                noteList?.let {
+                    lifecycleScope.launch {
+                        noteDao.remove(it)
+                        finish()
+                    }
+                }
             }
         }
         return super.onOptionsItemSelected(item)
