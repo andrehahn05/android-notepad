@@ -70,15 +70,20 @@ open class NoteFormActivity : AppCompatActivity() {
                 addNote()
             }
             R.id.details_menu_del -> {
-                noteList?.let {
-                    lifecycleScope.launch {
-                        noteDao.remove(it)
-                        finish()
-                    }
-                }
+                remove()
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun remove() {
+        noteList?.let {
+            lifecycleScope.launch {
+                noteDao.remove(it)
+                toast("Removido com sucesso")
+                finish()
+            }
+        }
     }
 
     private fun addNote() {
