@@ -1,6 +1,5 @@
 package com.hahn.notepad.ui.activity
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Lifecycle
@@ -51,10 +50,10 @@ class ListActivity : AppCompatActivity() {
     }
 
     private fun configRecyclerView() {
-        val divider = DividerItemDecoration(this,VERTICAL)
-         binding.activityListRv.addItemDecoration(divider)
-         binding.activityListRv.adapter = adapter
-         navigateToDetails()
+        val divider = DividerItemDecoration(this, VERTICAL)
+        binding.activityListRv.addItemDecoration(divider)
+        binding.activityListRv.adapter = adapter
+        navigateToDetails()
     }
 
     private fun navigateToForm() {
